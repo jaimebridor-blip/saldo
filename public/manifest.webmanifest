@@ -1,0 +1,19 @@
+{
+  "name": "Saldo — Contabilidad Financiera",
+  "short_name": "Saldo",
+  "description": "Práctica de Contabilidad Financiera (Grado, Plan General Contable español).",
+  "display": "standalone",
+  "start_url": "./",
+  "scope": "./",
+  "background_color": "#F4F2ED",
+  "theme_color": "#F4F2ED",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
