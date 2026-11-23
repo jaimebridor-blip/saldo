@@ -77,6 +77,12 @@ function r2(x: number): number {
   return Math.round(x * 100) / 100;
 }
 
+export function conPuntoFinal(texto: string): string {
+  const limpio = texto.trim();
+  if (!limpio) return '';
+  return limpio.endsWith('.') ? limpio : `${limpio}.`;
+}
+
 function mulberry32(seed: number): () => number {
   let t = seed >>> 0;
   return () => {

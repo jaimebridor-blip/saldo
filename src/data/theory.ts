@@ -171,7 +171,7 @@ export const PREGUNTAS_TEORIA: PreguntaTeoria[] = [
     tema: 'capital',
     tipo: 'opcion',
     enunciado:
-      'Si las acciones nuevas son el 20 % del capital resultante, capital nuevo =',
+      'Si las acciones nuevas son el 20 % del capital resultante, capital resultante =',
     opciones: [
       'capital anterior / 0,8',
       'capital anterior × 1,2',
@@ -180,7 +180,7 @@ export const PREGUNTAS_TEORIA: PreguntaTeoria[] = [
     ],
     correcta: 0,
     explicacion:
-      'Las acciones antiguas representan el 80 % restante del capital final, por lo que Capital nuevo = Capital anterior / 0,8.',
+      'Las acciones antiguas representan el 80 % restante del capital final, por lo que capital resultante = capital anterior / 0,8.',
   },
 
   // Nóminas
@@ -271,11 +271,11 @@ export const PREGUNTAS_TEORIA: PreguntaTeoria[] = [
     id: 'T19',
     tema: 'cierre',
     tipo: 'opcion',
-    enunciado: 'En la apertura el beneficio pasa a:',
+    enunciado: 'En la aplicación del resultado tras la apertura, el beneficio pasa de la 129 a:',
     opciones: ['120', '121', '129', '100'],
     correcta: 0,
     explicacion:
-      'Al abrir el nuevo ejercicio, el saldo acreedor de la 129 (beneficio) se traspasa a Remanente (120) hasta su distribución.',
+      'Tras el asiento de apertura del ejercicio siguiente (que reabre los saldos del cierre, con la 129 incluida), el asiento de aplicación del resultado traspasa el beneficio de 129 a 120 (o a reservas) o la pérdida de 121 a 129.',
   },
 ];
 
@@ -400,7 +400,7 @@ export const SECUENCIAS_ORDENA: SecuenciaOrdena[] = [
     id: 'ORD_CIERRE',
     tema: 'cierre',
     titulo: 'Cierre del ejercicio',
-    nota: 'Primero se calcula y contabiliza el impuesto (630 a 4752), después se regularizan gastos (grupo 6) e ingresos (grupo 7) contra 129 en cualquier orden, luego el asiento de cierre y finalmente la apertura.',
+    nota: 'Primero se calcula y contabiliza el impuesto (630 a 4752), después se regularizan gastos (grupo 6) e ingresos (grupo 7) contra 129 en cualquier orden, luego el asiento de cierre, después el asiento de apertura del ejercicio siguiente y finalmente la aplicación del resultado.',
     pasos: [
       {
         id: 'c1',
@@ -424,8 +424,14 @@ export const SECUENCIAS_ORDENA: SecuenciaOrdena[] = [
       },
       {
         id: 'c5',
-        texto: 'Asiento de apertura (beneficio a 120, pérdida a 121)',
+        texto: 'Asiento de apertura del ejercicio siguiente',
         rango: 4,
+      },
+      {
+        id: 'c6',
+        texto:
+          'Aplicación del resultado (beneficio de 129 a 120 o pérdida de 121 a 129)',
+        rango: 5,
       },
     ],
   },

@@ -120,7 +120,7 @@ export const BANK2: Ejercicio[] = [
       ] }
     ],
     "calc": [],
-    "nota": "Provisión a l/p en 14x; a 31/12 pasa a c/p (529) cuando vence en el ejercicio siguiente.",
+    "nota": "Provisión a l/p en 14x; a 31/12 pasa a c/p (529) cuando vence en el ejercicio siguiente. Criterio de manual: también puede usarse otra cuenta de gasto según el origen; sigue el criterio de tu profesor.",
     "fuente": "banco"
   },
   {
@@ -149,7 +149,7 @@ export const BANK2: Ejercicio[] = [
       {"etiqueta":"Deterioro a 31/12/20X6","valor":4840},
       {"etiqueta":"Pérdida por incobrable (650)","valor":7260}
     ],
-    "nota": "436 a 430 por el total con IVA; deterioro 694 a 490; al declararse incobrable se aplica 490 y el resto va a 650.",
+    "nota": "436 a 430 por el total con IVA; deterioro 694 a 490; al declararse incobrable se aplica 490 y el resto va a 650. Simplificación: no se recupera el IVA del crédito incobrable.",
     "fuente": "banco"
   },
   {
@@ -180,8 +180,8 @@ export const BANK2: Ejercicio[] = [
     "id": "E21",
     "tema": "cierre",
     "nivel": 3,
-    "titulo": "Regularización con pérdida y apertura",
-    "enunciado": "A 31/12/20X6, antes de regularizar, ACEREPESA, S.A. tiene estos saldos (en €): 700 Ventas de mercaderías 120.000; 752 Ingresos por arrendamientos 6.000; 600 Compras 95.000; 610 Variación de existencias (saldo deudor) 4.000; 640 Sueldos 30.000; 642 SS empresa 9.000; 621 Arrendamientos 7.000; 681 Amortización 5.000; 662 Intereses 3.000. No procede impuesto por haber pérdida. Contabiliza la regularización y el asiento de apertura del resultado.",
+    "titulo": "Regularización con pérdida y aplicación del resultado",
+    "enunciado": "A 31/12/20X6, antes de regularizar, ACEREPESA, S.A. tiene estos saldos (en €): 700 Ventas de mercaderías 120.000; 752 Ingresos por arrendamientos 6.000; 600 Compras 95.000; 610 Variación de existencias (saldo deudor) 4.000; 640 Sueldos 30.000; 642 SS empresa 9.000; 621 Arrendamientos 7.000; 681 Amortización 5.000; 662 Intereses 3.000. No procede impuesto por haber pérdida. Contabiliza la regularización y la aplicación del resultado.",
     "inicial": null,
     "asientos": [
       { "fecha": "31/12/20X6", "concepto": "Regularización de gastos (grupo 6)", "lineas": [
@@ -199,7 +199,7 @@ export const BANK2: Ejercicio[] = [
         {"c":"752","d":6000,"h":0},
         {"c":"129","d":0,"h":126000}
       ] },
-      { "fecha": "01/01/20X7", "concepto": "Apertura: traspaso de la pérdida", "lineas": [
+      { "fecha": "01/01/20X7", "concepto": "Aplicación del resultado: pérdida a 121", "lineas": [
         {"c":"121","d":27000,"h":0},
         {"c":"129","d":0,"h":27000}
       ] }
@@ -207,7 +207,7 @@ export const BANK2: Ejercicio[] = [
     "calc": [
       {"etiqueta":"Resultado del ejercicio (negativo = pérdida)","valor":-27000}
     ],
-    "nota": "Grupos 6 y 7 contra 129; la pérdida pasa a 121 y el beneficio a 120.",
+    "nota": "Grupos 6 y 7 contra 129. Tras el asiento de apertura del ejercicio siguiente (que reabre los saldos del cierre, con la 129 incluida), el asiento de aplicación del resultado traspasa el beneficio de 129 a 120 (o a reservas) o la pérdida de 121 a 129.",
     "fuente": "banco"
   },
   {

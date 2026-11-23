@@ -91,7 +91,7 @@ export const BANK1: Ejercicio[] = [
     "tema": "compras",
     "nivel": 2,
     "titulo": "Compra con descuentos y rappel",
-    "enunciado": "METALÚRGICA DEL DUERO, S.L. (IVA 21 %). 1) 10/03/20X6: compra mercaderías por 20.000 € (precio de lista). La factura incluye un descuento comercial del 5 % y un descuento por pronto pago del 2 % (sobre el importe ya rebajado); pago a 30 días. 2) 09/04/20X6: paga la factura por banco. 3) 31/12/20X6: el proveedor concede un «rappel» de 1.000 € (base imponible) por volumen de compras, abonado en cuenta fuera de factura.",
+    "enunciado": "METALÚRGICA DEL DUERO, S.L. (IVA 21 %). 1) 10/03/20X6: compra mercaderías por 20.000 € (precio de lista). La factura incluye un descuento comercial del 5 % y un descuento por pronto pago del 2 % (sobre el importe ya rebajado); pago a 30 días. 2) 09/04/20X6: paga la factura por banco. 3) 31/12/20X6: el proveedor concede un «rappel» de 1.000 € (base imponible) por volumen de compras, fuera de factura, que queda como saldo a favor de la empresa en la cuenta del proveedor, a descontar de próximas compras.",
     "inicial": null,
     "asientos": [
       { "fecha": "10/03/20X6", "concepto": "Compra", "lineas": [
@@ -252,7 +252,7 @@ export const BANK1: Ejercicio[] = [
       {"etiqueta":"Acciones nuevas (nº)","valor":7500},
       {"etiqueta":"Prima de emisión","valor":15000}
     ],
-    "nota": "Capital nuevo = capital anterior / (1 − % que entra). Prima = (precio de emisión − nominal) × acciones nuevas (110).",
+    "nota": "Capital resultante = capital anterior / (1 − % que entra). Prima = (precio de emisión − nominal) × acciones nuevas (110).",
     "fuente": "banco"
   },
   {

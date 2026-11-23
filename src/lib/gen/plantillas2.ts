@@ -1,5 +1,5 @@
 import { Fmt } from '../fmt';
-import type { Plantilla } from '../gen';
+import { conPuntoFinal, type Plantilla } from '../gen';
 import type { Asiento, Ejercicio } from '../types';
 
 export const PLANTILLAS_2: Plantilla[] = [
@@ -109,7 +109,7 @@ export const PLANTILLAS_2: Plantilla[] = [
       ];
 
       const enunciado =
-        `${ctx.empresa}. ` +
+        `${conPuntoFinal(ctx.empresa)} ` +
         `1) ${fConc}: recibe un préstamo bancario de ${Fmt.eur(principal)} a devolver en ${n} anualidades constantes de capital cada 31 de diciembre, al ${tipoPct} % anual (reclasifica al cierre la parte a corto plazo). ` +
         `2) ${fCuota}: paga por banco la primera cuota (capital e intereses del año) y reclasifica la cuota del ejercicio siguiente. ` +
         `Calcula además los intereses correspondientes al segundo año.`;
@@ -202,7 +202,7 @@ export const PLANTILLAS_2: Plantilla[] = [
         ];
 
         const enunciado =
-          `${ctx.empresa}. ` +
+          `${conPuntoFinal(ctx.empresa)} ` +
           `1) ${f1}: adquiere ${nAcc} acciones cotizadas a ${Fmt.eur(precioAcc)} cada una como inversión financiera temporal a corto plazo, pagando por banco. ` +
           `2) ${f2}: cobra en cuenta corriente unos dividendos líquidos de ${Fmt.eur(neto)}, tras practicarse una retención fiscal del 19 %.`;
 
@@ -275,7 +275,7 @@ export const PLANTILLAS_2: Plantilla[] = [
       ];
 
       const enunciado =
-        `${ctx.empresa}. ` +
+        `${conPuntoFinal(ctx.empresa)} ` +
         `1) ${f1}: adquiere bonos del Tesoro como valores representativos de deuda a corto plazo por ${Fmt.eur(nominalBonos)}, pagando por banco. ` +
         `2) ${f2}: cobra en cuenta corriente los intereses del cupón, percibiendo un importe neto de ${Fmt.eur(neto)} tras una retención del 19 %.`;
 
@@ -314,7 +314,7 @@ export const PLANTILLAS_2: Plantilla[] = [
           tema: 'prestamos',
           nivel: 1,
           titulo: 'Fianza constituida a largo plazo',
-          enunciado: `${ctx.empresa}. 1) ${f1}: firma un contrato de arrendamiento de una nave industrial a 4 años y entrega por transferencia bancaria ${Fmt.eur(importe)} en concepto de fianza.`,
+          enunciado: `${conPuntoFinal(ctx.empresa)} 1) ${f1}: firma un contrato de arrendamiento de una nave industrial a 4 años y entrega por transferencia bancaria ${Fmt.eur(importe)} en concepto de fianza.`,
           inicial: null,
           asientos: [
             {
@@ -348,7 +348,7 @@ export const PLANTILLAS_2: Plantilla[] = [
           tema: 'prestamos',
           nivel: 1,
           titulo: 'Fianza constituida a corto plazo',
-          enunciado: `${ctx.empresa}. 1) ${f1}: alquila maquinaria por 6 meses y deposita por banco una fianza de ${Fmt.eur(importe)} que recuperará al finalizar el contrato.`,
+          enunciado: `${conPuntoFinal(ctx.empresa)} 1) ${f1}: alquila maquinaria por 6 meses y deposita por banco una fianza de ${Fmt.eur(importe)} que recuperará al finalizar el contrato.`,
           inicial: null,
           asientos: [
             {
@@ -381,7 +381,7 @@ export const PLANTILLAS_2: Plantilla[] = [
         tema: 'prestamos',
         nivel: 1,
         titulo: 'Fianza recibida a largo plazo',
-        enunciado: `${ctx.empresa}. 1) ${f1}: arrienda un local de su propiedad a un tercero por 3 años y recibe por banco ${Fmt.eur(importe)} como fianza en garantía.`,
+        enunciado: `${conPuntoFinal(ctx.empresa)} 1) ${f1}: arrienda un local de su propiedad a un tercero por 3 años y recibe por banco ${Fmt.eur(importe)} como fianza en garantía.`,
         inicial: null,
         asientos: [
           {
@@ -436,7 +436,7 @@ export const PLANTILLAS_2: Plantilla[] = [
         nivel: 1,
         titulo: 'Constitución de la sociedad',
         enunciado:
-          `${ctx.empresa}. 1) ${f1}: se constituye la sociedad con un capital social de ${Fmt.eur(k)} totalmente suscrito y desembolsado. ` +
+          `${conPuntoFinal(ctx.empresa)} 1) ${f1}: se constituye la sociedad con un capital social de ${Fmt.eur(k)} totalmente suscrito y desembolsado. ` +
           `Los socios aportan un terreno valorado en ${Fmt.eur(terreno)}, una nave industrial (construcción) valorada en ${Fmt.eur(construccion)} y el resto mediante ingreso en la cuenta corriente bancaria.`,
         inicial: null,
         asientos: [
@@ -515,7 +515,7 @@ export const PLANTILLAS_2: Plantilla[] = [
         nivel: 3,
         titulo: 'Ampliación de capital con prima de emisión',
         enunciado:
-          `${ctx.empresa}. 1) ${f1}: la sociedad, cuyo capital social previo es de ${Fmt.eur(c0)}, acuerda una ampliación de capital ` +
+          `${conPuntoFinal(ctx.empresa)} 1) ${f1}: la sociedad, cuyo capital social previo es de ${Fmt.eur(c0)}, acuerda una ampliación de capital ` +
           `emitiendo nuevas acciones de ${Fmt.eur(nominal)} de valor nominal con una prima de emisión de ${Fmt.eur(prima)} por acción, totalmente suscritas y desembolsadas por banco. ` +
           `Las nuevas acciones representan exactamente el ${pPct} % del capital social resultante tras la ampliación.`,
         inicial: null,
@@ -677,7 +677,7 @@ export const PLANTILLAS_2: Plantilla[] = [
       ];
 
       const enunciado =
-        `${ctx.empresa}. ` +
+        `${conPuntoFinal(ctx.empresa)} ` +
         `1) ${fDev}: contabiliza la nómina del mes con un salario bruto de ${Fmt.eur(bruto)}, una retención de IRPF del ${irpfPct} %, Seguridad Social a cargo del trabajador del 6,5 % y Seguridad Social a cargo de la empresa del 30 %. ` +
         `2) ${fPagoNom}: paga la nómina líquida por banco. ` +
         `3) ${fPagoSS}: abona por banco las cuotas totales a la Seguridad Social. ` +
@@ -730,7 +730,7 @@ export const PLANTILLAS_2: Plantilla[] = [
         nivel: 3,
         titulo: 'Nómina con paga extra prorrateada',
         enunciado:
-          `${ctx.empresa}. 1) ${fDev}: contabiliza exclusivamente el devengo de la nómina de febrero sabiendo que el sueldo base mensual es de ${Fmt.eur(sueldo)} ` +
+          `${conPuntoFinal(ctx.empresa)} 1) ${fDev}: contabiliza exclusivamente el devengo de la nómina de febrero sabiendo que el sueldo base mensual es de ${Fmt.eur(sueldo)} ` +
           `y el trabajador tiene derecho a dos pagas extraordinarias al año de ${Fmt.eur(extra)} cada una (devengo semestral prorrateado; la parte de paga extra queda pendiente en remuneraciones pendientes hasta junio). ` +
           `Retención de IRPF: ${irpfPct} %; Seguridad Social del trabajador: 6,5 %; Seguridad Social de la empresa: 30 %.`,
         inicial: null,
@@ -999,7 +999,7 @@ export const PLANTILLAS_2: Plantilla[] = [
         nivel: 3,
         titulo: 'Amortización degresiva y suma de dígitos',
         enunciado:
-          `${ctx.empresa}. 1) ${fCierre}: adquirió el 01/01/${ctx.anio} una maquinaria por ${Fmt.eur(p)} (sin valor residual) con una vida útil de ${n} años. ` +
+          `${conPuntoFinal(ctx.empresa)} 1) ${fCierre}: adquirió el 01/01/${ctx.anio} una maquinaria por ${Fmt.eur(p)} (sin valor residual) con una vida útil de ${n} años. ` +
           `Calcula las dos primeras cuotas anuales y el VNC al término del segundo año mediante el método degresivo sobre saldo pendiente (coeficiente ${String(coef).replace('.', ',')}) ` +
           `y mediante suma de dígitos decrecientes, y contabiliza la primera cuota degresiva.`,
         inicial: null,
@@ -1059,7 +1059,7 @@ export const PLANTILLAS_2: Plantilla[] = [
         nivel: 2,
         titulo: 'Deterioro de valor y reversión',
         enunciado:
-          `${ctx.empresa}. ` +
+          `${conPuntoFinal(ctx.empresa)} ` +
           `1) ${f1}: al cierre del ejercicio, el importe recuperable de una maquinaria es inferior a su VNC en ${Fmt.eur(deterioro)}, registrándose el oportuno deterioro reversible. ` +
           `2) ${f2}: las condiciones de mercado mejoran y se recupera parte del valor, correspondiendo revertir ${Fmt.eur(reversion)} del deterioro dotado.`,
         inicial: null,
@@ -1340,7 +1340,7 @@ export const PLANTILLAS_2: Plantilla[] = [
         nivel: 3,
         titulo: 'Provisiones: dotación, reclasificación y pago',
         enunciado:
-          `${ctx.empresa}. ` +
+          `${conPuntoFinal(ctx.empresa)} ` +
           `1) ${f1}: dota una provisión de ${Fmt.eur(importe)} por ${motivo}. ` +
           `2) ${f2}: un año después, al quedar el vencimiento previsto dentro de los próximos 12 meses, reclasifica la provisión a corto plazo. ` +
           `3) ${f3}: dicta sentencia firme por el importe exacto provisionado y la empresa paga por banco.`,
@@ -1408,7 +1408,7 @@ export const PLANTILLAS_2: Plantilla[] = [
           { etiqueta: 'Reclasificación a c/p (529)', valor: importe },
           { etiqueta: 'Pago final por banco (572)', valor: importe },
         ],
-        nota: 'Las provisiones por impuestos usan la 141 y las de litigios la 142. Al quedar a menos de un año se reclasifican a la 529 y se cancelan contra 572 al pagar.',
+        nota: 'Las provisiones por impuestos usan la 141 y las de litigios la 142. Al quedar a menos de un año se reclasifican a la 529 y se cancelan contra 572 al pagar. Criterio de manual: también puede usarse otra cuenta de gasto según el origen; sigue el criterio de tu profesor.',
         fuente: 'gen',
       };
     },

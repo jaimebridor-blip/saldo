@@ -2,7 +2,7 @@ import { PGC } from '../../data/pgc';
 import type { TemaId } from '../../data/temas';
 import { Engine } from '../engine';
 import { Fmt } from '../fmt';
-import type { Plantilla, PlantillaContext, Rng } from '../gen';
+import { conPuntoFinal, type Plantilla, type PlantillaContext, type Rng } from '../gen';
 import { Masas } from '../masas';
 import type {
   Asiento,
@@ -549,6 +549,12 @@ function intentarSupuestoCompleto(
     `Durante el ejercicio ${anio} realiza las siguientes operaciones: ${bloquesTexto.join(' ')} ` +
     `${textoImpuesto} Redacta los asientos del libro diario y elabora la Cuenta de PyG y el Balance de situación finales.`;
 
+  let notaSupuesto =
+    'En el supuesto global se liquidan las operaciones en orden, se ajusta el 25 % de impuesto sobre beneficios si el BAI es positivo y el Balance final cuadra con Activo = Patrimonio neto + Pasivo.';
+  if (elegidas.includes('D1')) {
+    notaSupuesto += ' Simplificación: no se recupera el IVA del crédito incobrable.';
+  }
+
   return {
     id: `S-completo-${semillaBase}`,
     tema: 'completo',
@@ -558,7 +564,7 @@ function intentarSupuestoCompleto(
     inicial,
     asientos,
     calc,
-    nota: 'En el supuesto global se liquidan las operaciones en orden, se ajusta el 25 % de impuesto sobre beneficios si el BAI es positivo y el Balance final cuadra con Activo = Patrimonio neto + Pasivo.',
+    nota: notaSupuesto,
     fuente: 'gen',
   };
 }
@@ -690,7 +696,7 @@ function intentarSupuestoPorTema(
     }
 
     const limpio = limpiarCabeceraEnunciado(ej.enunciado, empresa);
-    bloquesTexto.push(`${idx + 1}) ${limpio}`);
+    bloquesTexto.push(`${idx + 1}) ${conPuntoFinal(limpio)}`);
     asientos.push(...ej.asientos);
   }
 
@@ -738,6 +744,16 @@ function intentarSupuestoPorTema(
     `Realiza los siguientes bloques de operaciones: ${bloquesTexto.join(' ')} ` +
     `Elabora finalmente el resumen de Cuenta de PyG y masas del Balance.`;
 
+  let notaTema =
+    'Cada apartado integra sus asientos en el libro diario único del supuesto para calcular conjuntamente la Cuenta de PyG y el Balance de situación.';
+  if (seleccionadas.some((p) => p.id === 'D1')) {
+    notaTema += ' Simplificación: no se recupera el IVA del crédito incobrable.';
+  }
+  if (seleccionadas.some((p) => p.id === 'J3')) {
+    notaTema +=
+      ' Criterio de manual: también puede usarse otra cuenta de gasto según el origen; sigue el criterio de tu profesor.';
+  }
+
   return {
     id: `S-${temaId}-${semillaBase}`,
     tema: temaId,
@@ -747,7 +763,7 @@ function intentarSupuestoPorTema(
     inicial,
     asientos,
     calc,
-    nota: 'Cada apartado integra sus asientos en el libro diario único del supuesto para calcular conjuntamente la Cuenta de PyG y el Balance de situación.',
+    nota: notaTema,
     fuente: 'gen',
   };
 }

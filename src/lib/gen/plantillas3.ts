@@ -1,5 +1,5 @@
 import { Fmt } from '../fmt';
-import type { Plantilla } from '../gen';
+import { conPuntoFinal, type Plantilla } from '../gen';
 import { Masas } from '../masas';
 import type { Asiento, Ejercicio } from '../types';
 
@@ -128,8 +128,8 @@ export const PLANTILLAS_3: Plantilla[] = [
           : ' sin deterioro inicial';
 
       const enunciado =
-        `${ctx.empresa}. Existencias de mercaderías valoradas por FIFO (método especulativo). ` +
-        `Al inicio del ejercicio ${ctx.anio} hay ${u0} unidades a ${Fmt.eur(p0)}/ud.${textoD0}. ` +
+        `${conPuntoFinal(ctx.empresa)} Existencias de mercaderías valoradas por FIFO (método especulativo). ` +
+        `${conPuntoFinal(`Al inicio del ejercicio ${ctx.anio} hay ${u0} unidades a ${Fmt.eur(p0)}/ud.${textoD0}`)} ` +
         `Durante el año se compran ${u1} unidades a ${Fmt.eur(p1)}/ud. y se venden ${v} unidades. ` +
         `1) ${fCierre}: al cierre, el valor neto realizable (mercado) del stock final es de ${Fmt.eur(mercado)}. ` +
         `Calcula las existencias finales, el coste de ventas y el deterioro al cierre, y realiza los asientos de regularización.`;
@@ -277,7 +277,7 @@ export const PLANTILLAS_3: Plantilla[] = [
           : '';
 
       const enunciado =
-        `${ctx.empresa}. Al inicio del ejercicio ${ctx.anio} tiene ${u} uds. de mercaderías a ${Fmt.eur(p0)}/ud.${textoD0}. ` +
+        `${conPuntoFinal(ctx.empresa)} ${conPuntoFinal(`Al inicio del ejercicio ${ctx.anio} tiene ${u} uds. de mercaderías a ${Fmt.eur(p0)}/ud.${textoD0}`)} ` +
         `Compra posteriormente otras ${u} uds. a ${Fmt.eur(p1)}/ud. y vende ${v} uds. durante el año. ` +
         `1) ${fCierre}: realiza los asientos de regularización por PMP sabiendo que el valor de mercado final es de ${Fmt.eur(mercado)}, y calcula además el valor de las existencias finales si se aplicara LIFO (solo a efectos teóricos de examen).`;
 
@@ -405,7 +405,7 @@ export const PLANTILLAS_3: Plantilla[] = [
           { etiqueta: 'Deterioro dotado (490)', valor: deterioro },
           { etiqueta: 'Pérdida incobrable adicional (650)', valor: incobrable },
         ],
-        nota: 'En el método individualizado se reclasifica el total (con IVA) a la 436 y se dota el deterioro (694 a 490). Al resultar incobrable se aplica la 490 y la diferencia va a la 650.',
+        nota: 'En el método individualizado se reclasifica el total (con IVA) a la 436 y se dota el deterioro (694 a 490). Al resultar incobrable se aplica la 490 y la diferencia va a la 650. Simplificación: no se recupera el IVA del crédito incobrable.',
         fuente: 'gen',
       };
     },
@@ -519,7 +519,7 @@ export const PLANTILLAS_3: Plantilla[] = [
       }
 
       const enunciado =
-        `${ctx.empresa}. Estima la insolvencia de sus créditos comerciales al 30 % sobre el saldo de clientes dudosos al cierre (método de ajuste por diferencia). ` +
+        `${conPuntoFinal(ctx.empresa)} Estima la insolvencia de sus créditos comerciales al 30 % sobre el saldo de clientes dudosos al cierre (método de ajuste por diferencia). ` +
         `Parte con un saldo previo de deterioro de ${Fmt.eur(saldoInicial490)}. ` +
         `1) ${f1}: el saldo de clientes dudosos asciende a ${Fmt.eur(dudosos1)}. ` +
         `2) ${f2}: un año después, el saldo de clientes dudosos es de ${Fmt.eur(dudosos2)}. ` +
@@ -635,7 +635,7 @@ export const PLANTILLAS_3: Plantilla[] = [
         },
         {
           fecha: fApertura,
-          concepto: 'Traspaso del resultado positivo a Remanente en apertura',
+          concepto: 'Aplicación del resultado: beneficio a 120',
           lineas: [
             {
               c: '129',
@@ -654,12 +654,12 @@ export const PLANTILLAS_3: Plantilla[] = [
       ];
 
       const enunciado =
-        `${ctx.empresa}. A ${fCierre}, antes del impuesto sobre beneficios (25 %), presenta los siguientes saldos de gestión: ` +
+        `${conPuntoFinal(ctx.empresa)} A ${fCierre}, antes del impuesto sobre beneficios (25 %), presenta los siguientes saldos de gestión: ` +
         `Compras de mercaderías ${Fmt.eur(c600)}, Variación de existencias (saldo deudor) ${Fmt.eur(c610)}, ` +
         `Arrendamientos ${Fmt.eur(c621)}, Sueldos y salarios ${Fmt.eur(c640)}, Seguridad Social de la empresa ${Fmt.eur(c642)}, ` +
         `Amortización del inmovilizado material ${Fmt.eur(c681)}, Intereses de deudas ${Fmt.eur(c662)}, ` +
         `Ventas de mercaderías ${Fmt.eur(c700)} e Ingresos por dividendos ${Fmt.eur(c760)}. ` +
-        `Contabiliza el impuesto del 25 %, la regularización de pérdidas y ganancias al cierre y el traspaso del beneficio a remanente el ${fApertura}.`;
+        `Contabiliza el impuesto del 25 %, la regularización de pérdidas y ganancias al cierre y la aplicación del resultado a remanente el ${fApertura}.`;
 
       return {
         id: '',
@@ -684,7 +684,7 @@ export const PLANTILLAS_3: Plantilla[] = [
           { etiqueta: 'Impuesto sobre beneficios (25 %)', valor: impuesto },
           { etiqueta: 'Beneficio neto (129)', valor: beneficioNeto },
         ],
-        nota: 'Con beneficio antes de impuestos positivo se devenga el 25 % en la 630 contra 4752, se saldan todos los gastos (incluido 630) e ingresos contra la 129 y al abrir el año siguiente pasa a la 120.',
+        nota: 'Con beneficio antes de impuestos positivo se devenga el 25 % en la 630 contra 4752 y se saldan todos los gastos (incluido 630) e ingresos contra la 129. Tras el asiento de apertura del ejercicio siguiente (que reabre los saldos del cierre, con la 129 incluida), el asiento de aplicación del resultado traspasa el beneficio de 129 a 120 (o a reservas) o la pérdida de 121 a 129.',
         fuente: 'gen',
       };
     },
@@ -754,7 +754,7 @@ export const PLANTILLAS_3: Plantilla[] = [
         },
         {
           fecha: fApertura,
-          concepto: 'Traspaso del resultado negativo en la apertura',
+          concepto: 'Aplicación del resultado: pérdida a 121',
           lineas: [
             {
               c: '121',
@@ -773,12 +773,12 @@ export const PLANTILLAS_3: Plantilla[] = [
       ];
 
       const enunciado =
-        `${ctx.empresa}. A ${fCierre} presenta los siguientes saldos de gestión: ` +
+        `${conPuntoFinal(ctx.empresa)} A ${fCierre} presenta los siguientes saldos de gestión: ` +
         `Compras de mercaderías ${Fmt.eur(c600)}, Variación de existencias (saldo deudor) ${Fmt.eur(c610)}, ` +
         `Arrendamientos ${Fmt.eur(c621)}, Sueldos y salarios ${Fmt.eur(c640)}, Seguridad Social de la empresa ${Fmt.eur(c642)}, ` +
         `Amortización del inmovilizado material ${Fmt.eur(c681)}, Intereses de deudas ${Fmt.eur(c662)}, ` +
         `Ventas de mercaderías ${Fmt.eur(c700)} e Ingresos por dividendos ${Fmt.eur(c760)}. ` +
-        `Realiza la regularización al cierre y el asiento del ${fApertura} por el resultado obtenido.`;
+        `Realiza la regularización al cierre y el asiento de aplicación del resultado el ${fApertura}.`;
 
       return {
         id: '',
@@ -803,7 +803,7 @@ export const PLANTILLAS_3: Plantilla[] = [
           { etiqueta: 'Total gastos', valor: totalGastos },
           { etiqueta: 'Pérdida del ejercicio (121)', valor: perdida },
         ],
-        nota: 'Cuando los gastos superan a los ingresos no se devenga impuesto sobre beneficios y la 129 queda con saldo deudor, traspasándose a la 121 al inicio del ejercicio siguiente.',
+        nota: 'Cuando los gastos superan a los ingresos no se devenga impuesto sobre beneficios y la 129 queda con saldo deudor. Tras el asiento de apertura del ejercicio siguiente (que reabre los saldos del cierre, con la 129 incluida), el asiento de aplicación del resultado traspasa el beneficio de 129 a 120 (o a reservas) o la pérdida de 121 a 129.',
         fuente: 'gen',
       };
     },
@@ -905,7 +905,7 @@ export const PLANTILLAS_3: Plantilla[] = [
       }
 
       const enunciado =
-        `${ctx.empresa}. A ${fCierre} (antes del impuesto sobre beneficios del 25 %) presenta los siguientes saldos: ` +
+        `${conPuntoFinal(ctx.empresa)} A ${fCierre} (antes del impuesto sobre beneficios del 25 %) presenta los siguientes saldos: ` +
         `Maquinaria ${Fmt.eur(c213)}, Amortización acumulada (281) ${Fmt.eur(c281)}, Mercaderías ${Fmt.eur(c300)}, ` +
         `Clientes ${Fmt.eur(c430)}, Bancos ${Fmt.eur(c572)}, Proveedores ${Fmt.eur(c400)}, Deudas l/p entidades de crédito ${Fmt.eur(c170)}, ` +
         `Deudas c/p entidades de crédito ${Fmt.eur(c520)}, Capital social ${Fmt.eur(c100)}, Reservas voluntarias (cifra de cierre) ${Fmt.eur(c113)}, ` +

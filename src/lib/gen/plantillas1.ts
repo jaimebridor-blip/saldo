@@ -1,5 +1,5 @@
 import { Fmt } from '../fmt';
-import type { Plantilla } from '../gen';
+import { conPuntoFinal, type Plantilla } from '../gen';
 import type { Asiento, Ejercicio } from '../types';
 
 export const PLANTILLAS_1: Plantilla[] = [
@@ -41,7 +41,7 @@ export const PLANTILLAS_1: Plantilla[] = [
       }
 
       const enunciado =
-        `${ctx.empresa}. A 31/12/${ctx.anio}, la empresa presenta los siguientes elementos patrimoniales: ` +
+        `${conPuntoFinal(ctx.empresa)} A 31/12/${ctx.anio}, la empresa presenta los siguientes elementos patrimoniales: ` +
         `Maquinaria por ${Fmt.eur(maquinaria)} (con una amortización acumulada de ${Fmt.eur(amortAcum)}), ` +
         `Mercaderías por ${Fmt.eur(mercaderias)}, Clientes por ${Fmt.eur(clientes)}, ` +
         `Bancos c/c por ${Fmt.eur(bancos)}, Caja por ${Fmt.eur(caja)}, ` +
@@ -189,7 +189,7 @@ export const PLANTILLAS_1: Plantilla[] = [
         .join('; ');
 
       const enunciado =
-        `${ctx.empresa}. A 31/12/${ctx.anio}, la empresa presenta los siguientes saldos (en euros): ${listaTexto}. ` +
+        `${conPuntoFinal(ctx.empresa)} A 31/12/${ctx.anio}, la empresa presenta los siguientes saldos (en euros): ${listaTexto}. ` +
         `Clasifica las masas patrimoniales y calcula el Activo no corriente (neto de amortización), el Activo corriente, el Pasivo no corriente, el Pasivo corriente y el Patrimonio neto.`;
 
       return {
@@ -304,7 +304,7 @@ export const PLANTILLAS_1: Plantilla[] = [
       };
 
       const enunciado =
-        `${ctx.empresa}. 1) ${fecha}: la empresa inicia el ejercicio con el siguiente inventario patrimonial: ` +
+        `${conPuntoFinal(ctx.empresa)} 1) ${fecha}: la empresa inicia el ejercicio con el siguiente inventario patrimonial: ` +
         `Maquinaria ${Fmt.eur(c213)}, Amortización acumulada del inmovilizado material ${Fmt.eur(c281)}, ` +
         `Mercaderías ${Fmt.eur(c300)}, Clientes ${Fmt.eur(c430)}, Bancos c/c ${Fmt.eur(c572)}, ` +
         `Proveedores ${Fmt.eur(c400)}, Deudas a largo plazo con entidades de crédito ${Fmt.eur(c170)}, ` +
@@ -349,7 +349,6 @@ export const PLANTILLAS_1: Plantilla[] = [
       ];
 
       const elegidos = rng.barajar(catalogoServicios).slice(0, 3);
-      const tributoPendiente = rng.next() < 0.5;
       const tributoBase = rng.entero(400, 2000, 100);
 
       const asientos: Asiento[] = [];
@@ -400,15 +399,9 @@ export const PLANTILLAS_1: Plantilla[] = [
       });
 
       const fechaTributo = ctx.fecha(25, 3);
-      const cuentaPagoTributo = tributoPendiente ? '410' : '572';
-      if (tributoPendiente) {
-        total410 = ctx.r2(total410 + tributoBase);
-      }
 
       textosOperaciones.push(
-        `4) ${fechaTributo}: devengo de un impuesto municipal (IBI, sin IVA) por ${Fmt.eur(tributoBase)}, ${
-          tributoPendiente ? 'que queda pendiente de pago' : 'pagado mediante transferencia bancaria'
-        }.`
+        `4) ${fechaTributo}: devengo de un impuesto municipal (IBI, sin IVA) por ${Fmt.eur(tributoBase)}, pagado mediante transferencia bancaria.`
       );
 
       asientos.push({
@@ -422,12 +415,10 @@ export const PLANTILLAS_1: Plantilla[] = [
             por: 'Tributo distinto del impuesto sobre beneficios (cuenta 631)',
           },
           {
-            c: cuentaPagoTributo,
+            c: '572',
             d: 0,
             h: tributoBase,
-            por: tributoPendiente
-              ? 'Obligación pendiente de pago'
-              : 'Pago inmediato por cuenta bancaria',
+            por: 'Pago inmediato por cuenta bancaria',
           },
         ],
       });
@@ -516,7 +507,7 @@ export const PLANTILLAS_1: Plantilla[] = [
         nivel: 2,
         titulo: 'Balance de comprobación de sumas y saldos',
         enunciado:
-          `${ctx.empresa}. Con las siguientes sumas acumuladas a 31/12/${ctx.anio}: ${filas.join(' | ')}. ` +
+          `${conPuntoFinal(ctx.empresa)} Con las siguientes sumas acumuladas a 31/12/${ctx.anio}: ${filas.join(' | ')}. ` +
           `Determina el Capital social (100) como cifra de cierre, los saldos de Bancos (572), Proveedores (400) y Ventas (700) con su sentido, el total de sumas y el total de saldos deudores.`,
         inicial: null,
         asientos: [],
@@ -900,7 +891,7 @@ export const PLANTILLAS_1: Plantilla[] = [
         `${ctx.empresa} (IVA 21 %). ` +
         `1) ${f1}: compra mercaderías a crédito por un precio bruto de ${Fmt.eur(precioLista)} con un descuento comercial en factura del ${dPct} %. ` +
         `2) ${f2}: paga anticipadamente por banco, obteniendo un descuento por pronto pago del ${pPct} % fuera de factura sobre la base de la compra. ` +
-        `3) ${f3}: al cierre del ejercicio, el proveedor concede un «rappel» fuera de factura por volumen de pedidos de ${Fmt.eur(r)} (registrado en cuenta de proveedores).`;
+        `3) ${f3}: al cierre del ejercicio, el proveedor concede un «rappel» por volumen de pedidos de ${Fmt.eur(r)}, fuera de factura, que queda como saldo a favor de la empresa en la cuenta del proveedor, a descontar de próximas compras.`;
 
       return {
         id: '',
